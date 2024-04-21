@@ -5,10 +5,9 @@ lapply(libraries,library, character.only = TRUE)
 
 # Helper function
 save_plot <- function(plot,name, w, h){
-  pdf(file=paste0("./results/figures/",name), width=w, height=h)
+  png(file=paste0("./results/figures/",name), width=w, height=h, units = "in", res = 300)
   plot
 }
-
 ####GENE NAMES ANOTATION####
 # Import the data from the Thermo software Excel file and select the columns of interest.
 
@@ -158,7 +157,7 @@ Proteome_volcano_plot <- ggplot(data_results, aes(x = log2FC, y = -log10(padj), 
 
 Proteome_volcano_plot
 
-save_plot(Proteome_volcano_plot,"Fig1D_proteome_volcano_plot.pdf",9,5)
+save_plot(Proteome_volcano_plot,"Fig1D_proteome_volcano_plot.png",8,8)
 dev.off()
 
 #####Heatmap Plot#####
@@ -194,5 +193,5 @@ proteome_heatmap <- pheatmap(Proteome_BJ[!is.na(Proteome_BJ$gene.names)& Proteom
                              main = "Proteome BJ-5TA TGF-B 24h")
 proteome_heatmap
 
-save_plot(proteome_heatmap,"Fig4A_proteome_heatmap.pdf",9,5)
+save_plot(proteome_heatmap,"Fig4A_proteome_heatmap.png",5,9)
 dev.off()
